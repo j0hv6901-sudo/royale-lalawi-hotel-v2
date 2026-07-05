@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms | Hotel HMS</title>
+
+    <link rel="stylesheet" href="../assets/layout.css">
+    <script src="../assets/auth.js"></script>
+    <script>Auth.requireAuth();</script>
+</head>
+
+<body>
+
+<div id="sidebar"></div>
+<div id="topbar"></div>
+
+<div class="content">
+
+    <h1>Room Management</h1>
+
+    <!-- Add Room -->
+    <div style="margin: 20px 0;">
+        <input id="roomName" placeholder="Room Name">
+        <input id="roomPrice" placeholder="Price">
+        <input id="roomCapacity" placeholder="Capacity">
+
+        <button onclick="createRoom()">Add Room</button>
+    </div>
+
+    <!-- Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Price</th>
+                <th>Capacity</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="roomTable">
+            <tr>
+                <td colspan="5">No Rooms Yet</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="../assets/sidebar.js"></script>
+<script src="../assets/topbar.js"></script>
+<script src="../assets/data.js"></script>
+<script src="../assets/rooms.js"></script>
+
+<script>
+function createRoom() {
+    const name = document.getElementById("roomName").value;
+    const price = document.getElementById("roomPrice").value;
+    const capacity = document.getElementById("roomCapacity").value;
+
+    if (!name || !price || !capacity) return;
+
+    addRoom(name, price, capacity);
+
+    document.getElementById("roomName").value = "";
+    document.getElementById("roomPrice").value = "";
+    document.getElementById("roomCapacity").value = "";
+}
+</script>
+
+</body>
+</html>
