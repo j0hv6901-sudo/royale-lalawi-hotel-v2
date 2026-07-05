@@ -5,12 +5,15 @@
     <title>Rooms | Hotel HMS</title>
 
     <link rel="stylesheet" href="../assets/layout.css">
+
+    <!-- Auth -->
     <script src="../assets/auth.js"></script>
     <script>Auth.requireAuth();</script>
 </head>
 
 <body>
 
+<!-- Sidebar + Topbar -->
 <div id="sidebar"></div>
 <div id="topbar"></div>
 
@@ -18,7 +21,7 @@
 
     <h1>Room Management</h1>
 
-    <!-- Add Room -->
+    <!-- ADD ROOM FORM -->
     <div style="margin: 20px 0;">
         <input id="roomName" placeholder="Room Name">
         <input id="roomPrice" placeholder="Price">
@@ -27,8 +30,8 @@
         <button onclick="createRoom()">Add Room</button>
     </div>
 
-    <!-- Table -->
-    <table>
+    <!-- ROOMS TABLE -->
+    <table border="1" width="100%" cellspacing="0" cellpadding="10">
         <thead>
             <tr>
                 <th>Room</th>
@@ -39,27 +42,33 @@
             </tr>
         </thead>
 
-        <tbody id="roomTable">
+        <tbody id="roomsTable">
             <tr>
-                <td colspan="5">No Rooms Yet</td>
+                <td colspan="5">Loading rooms...</td>
             </tr>
         </tbody>
     </table>
 
 </div>
 
+<!-- UI SCRIPTS -->
 <script src="../assets/sidebar.js"></script>
 <script src="../assets/topbar.js"></script>
-<script src="../assets/data.js"></script>
-<script src="../assets/rooms.js"></script>
 
+<!-- FIREBASE ROOMS SYSTEM (ONLY DATA LAYER) -->
+<script src="../assets/firebase-rooms.js"></script>
+
+<!-- ADD ROOM FUNCTION -->
 <script>
 function createRoom() {
     const name = document.getElementById("roomName").value;
     const price = document.getElementById("roomPrice").value;
     const capacity = document.getElementById("roomCapacity").value;
 
-    if (!name || !price || !capacity) return;
+    if (!name || !price || !capacity) {
+        alert("Please fill all fields");
+        return;
+    }
 
     addRoom(name, price, capacity);
 
