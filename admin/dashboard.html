@@ -81,7 +81,11 @@
 <script src="../assets/sidebar.js"></script>
 <script src="../assets/topbar.js"></script>
 
-<script src="../assets/firebase-bookings.js"></script>
+<!-- Firebase MUST load first -->
+<script type="module" src="../assets/firebase-init.js"></script>
 
+<!-- App logic -->
+<script src="../assets/admin.js"></script>
+<script src="../assets/firebase-bookings.js"></script>
 </body>
 </html>
