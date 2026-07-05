@@ -1,47 +1,51 @@
+let unsubscribeDashboard = null;
+
 async function loadDashboard() {
     const table = document.getElementById("bookingTable");
     if (!table) return;
 
-    let checkins = 0;
-    let checkouts = 0;
-    let pending = 0;
-    let revenue = 0;
+    // 🚨 prevent duplicate listeners (IMPORTANT FIX)
+    if (unsubscribeDashboard) {
+        unsubscribeDashboard();
+        unsubscribeDashboard = null;
+    }
 
-    // REAL-TIME LISTENER (IMPORTANT UPGRADE)
-    firebaseAPI.onSnapshot(
-        firebaseAPI.collection(db, "bookings"),
+    const bookingsRef = firebaseAPI.collection(db, "bookings");
+
+    unsubscribeDashboard = firebaseAPI.onSnapshot(
+        bookingsRef,
         (snapshot) => {
 
-            checkins = 0;
-            checkouts = 0;
-            pending = 0;
-            revenue = 0;
+            let checkins = 0;
+            let checkouts = 0;
+            let pending = 0;
+            let revenue = 0;
 
             let rows = "";
 
             snapshot.forEach((docSnap) => {
                 const b = docSnap.data();
 
-                // SAFE VALUE HANDLING
-                const guestName = b.guestName || "N/A";
-                const roomName = b.roomName || "N/A";
-                const checkIn = b.checkIn || "-";
-                const checkOut = b.checkOut || "-";
-                const status = b.status || "Pending";
+                // SAFE DEFAULTS
+                const guestName = b.guestName ?? "N/A";
+                const roomName = b.roomName ?? "N/A";
+                const checkIn = b.checkIn ?? "-";
+                const checkOut = b.checkOut ?? "-";
+                const status = b.status ?? "Pending";
 
-                // STATUS COUNTERS (ROBUST)
+                // STATUS COUNTERS
                 if (status === "Checked In") checkins++;
                 else if (status === "Checked Out") checkouts++;
                 else pending++;
 
-                // SAFE REVENUE PARSING
-                const amount = parseFloat(
-                    String(b.total || 0).replace(/[^\d.]/g, "")
+                // SAFE REVENUE PARSING (V2 FIX)
+                const amount = Number(
+                    String(b.total ?? 0).replace(/[^\d.]/g, "")
                 );
 
-                revenue += amount || 0;
+                revenue += isNaN(amount) ? 0 : amount;
 
-                // TABLE ROW
+                // ROW BUILDING
                 rows += `
                     <tr>
                         <td>${guestName}</td>
@@ -53,14 +57,14 @@ async function loadDashboard() {
                 `;
             });
 
-            // UPDATE TABLE ONCE (PERFORMANCE FIX)
+            // SINGLE DOM UPDATE (PERFORMANCE)
             table.innerHTML = rows || `
                 <tr>
                     <td colspan="5">No bookings found</td>
                 </tr>
             `;
 
-            // SAFE UI UPDATES
+            // SAFE UI UPDATER
             const setText = (id, value) => {
                 const el = document.getElementById(id);
                 if (el) el.innerText = value;
@@ -74,5 +78,5 @@ async function loadDashboard() {
     );
 }
 
-// AUTO LOAD
+// AUTO START
 document.addEventListener("DOMContentLoaded", loadDashboard);
