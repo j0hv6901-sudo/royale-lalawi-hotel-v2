@@ -1,82 +1,82 @@
-let unsubscribeDashboard = null;
+let dashboardState = {
+    bookings: [],
+    rooms: [],
+    checkins: 0,
+    checkouts: 0,
+    pending: 0,
+    revenue: 0
+};
 
+let unsubscribeDashboard = null;
 async function loadDashboard() {
     const table = document.getElementById("bookingTable");
     if (!table) return;
 
-    // 🚨 prevent duplicate listeners (IMPORTANT FIX)
+    // prevent duplicate listeners
     if (unsubscribeDashboard) {
         unsubscribeDashboard();
-        unsubscribeDashboard = null;
     }
 
     const bookingsRef = firebaseAPI.collection(db, "bookings");
 
     unsubscribeDashboard = firebaseAPI.onSnapshot(
         bookingsRef,
-        (snapshot) => {
+        async (snapshot) => {
 
             let checkins = 0;
             let checkouts = 0;
             let pending = 0;
             let revenue = 0;
 
-            let rows = "";
+            let rows = [];
+            let bookings = [];
 
             snapshot.forEach((docSnap) => {
                 const b = docSnap.data();
 
-                // SAFE DEFAULTS
-                const guestName = b.guestName ?? "N/A";
-                const roomName = b.roomName ?? "N/A";
-                const checkIn = b.checkIn ?? "-";
-                const checkOut = b.checkOut ?? "-";
                 const status = b.status ?? "Pending";
 
-                // STATUS COUNTERS
+                // counters
                 if (status === "Checked In") checkins++;
                 else if (status === "Checked Out") checkouts++;
                 else pending++;
 
-                // SAFE REVENUE PARSING (V2 FIX)
+                // revenue safe parse
                 const amount = Number(
                     String(b.total ?? 0).replace(/[^\d.]/g, "")
                 );
 
                 revenue += isNaN(amount) ? 0 : amount;
 
-                // ROW BUILDING
-                rows += `
+                bookings.push(b);
+
+                rows.push(`
                     <tr>
-                        <td>${guestName}</td>
-                        <td>${roomName}</td>
-                        <td>${checkIn}</td>
-                        <td>${checkOut}</td>
+                        <td>${b.guestName ?? "N/A"}</td>
+                        <td>${b.roomName ?? "N/A"}</td>
+                        <td>${b.checkIn ?? "-"}</td>
+                        <td>${b.checkOut ?? "-"}</td>
                         <td>${status}</td>
                     </tr>
-                `;
+                `);
             });
 
-            // SINGLE DOM UPDATE (PERFORMANCE)
-            table.innerHTML = rows || `
-                <tr>
-                    <td colspan="5">No bookings found</td>
-                </tr>
-            `;
-
-            // SAFE UI UPDATER
-            const setText = (id, value) => {
-                const el = document.getElementById(id);
-                if (el) el.innerText = value;
+            // commit state
+            dashboardState = {
+                ...dashboardState,
+                bookings,
+                checkins,
+                checkouts,
+                pending,
+                revenue
             };
 
-            setText("checkins", checkins);
-            setText("checkouts", checkouts);
-            setText("pending", pending);
-            setText("revenue", "₹" + revenue.toLocaleString());
+            // update UI once
+            renderDashboard(rows);
+            updateStats();
+            await syncRoomEngine();
         }
     );
 }
 
-// AUTO START
 document.addEventListener("DOMContentLoaded", loadDashboard);
