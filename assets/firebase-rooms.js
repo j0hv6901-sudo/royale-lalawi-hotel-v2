@@ -1,40 +1,49 @@
-async function loadRooms() {
+// LOAD BOOKINGS FROM FIRESTORE
+async function loadBookings() {
 
-    const table = document.getElementById("roomTable");
+    const table = document.getElementById("bookingTable");
     table.innerHTML = "";
 
     const snapshot = await firebaseAPI.getDocs(
-        firebaseAPI.collection(db, "rooms")
+        firebaseAPI.collection(db, "bookings")
     );
 
+    if (snapshot.empty) {
+        table.innerHTML = `
+            <tr>
+                <td colspan="3">No Bookings Yet</td>
+            </tr>
+        `;
+        return;
+    }
+
     snapshot.forEach(docSnap => {
-        const r = docSnap.data();
+        const b = docSnap.data();
 
         table.innerHTML += `
             <tr>
-                <td>${r.name}</td>
-                <td>₹${r.price}</td>
-                <td>${r.capacity}</td>
-                <td>${r.status}</td>
+                <td>${b.guest}</td>
+                <td>${b.room}</td>
+                <td>${b.status}</td>
             </tr>
         `;
     });
 }
 
-// Add room
-async function addRoom(name, price, capacity) {
+// ADD BOOKING TO FIREBASE
+async function addBooking(guest, room) {
 
     await firebaseAPI.addDoc(
-        firebaseAPI.collection(db, "rooms"),
+        firebaseAPI.collection(db, "bookings"),
         {
-            name,
-            price,
-            capacity,
-            status: "Available"
+            guest: guest,
+            room: room,
+            status: "Pending",
+            date: new Date().toISOString()
         }
     );
 
-    loadRooms();
+    loadBookings(); // refresh UI
 }
 
-document.addEventListener("DOMContentLoaded", loadRooms);
+document.addEventListener("DOMContentLoaded", loadBookings);
