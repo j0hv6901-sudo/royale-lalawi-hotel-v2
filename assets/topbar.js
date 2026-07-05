@@ -29,3 +29,8 @@ document.getElementById("topbar").innerHTML = `
 
 </div>
 `;
+document.addEventListener("click", function(e) {
+    if (e.target.closest("#logoutBtn")) {
+        Auth.logout();
+    }
+});
