@@ -1,4 +1,7 @@
+// Firebase App
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+// Firestore (Database)
 import {
     getFirestore,
     collection,
@@ -9,21 +12,21 @@ import {
     doc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 🔥 Your Firebase config
+// Your Firebase config
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "XXXX",
-    appId: "XXXX"
+  apiKey: "AIzaSyC6HW7VWRiVg0tEF3qbS7oe44Nktpl-H8",
+  authDomain: "royale-lalawi-hms.firebaseapp.com",
+  projectId: "royale-lalawi-hms",
+  storageBucket: "royale-lalawi-hms.appspot.com",
+  messagingSenderId: "274804451260",
+  appId: "1:274804451260:web:48a374f1a03edf49682db9"
 };
 
-// Init Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Export for use
+// Make Firebase available globally (important for your current structure)
 window.db = db;
 window.firebaseAPI = {
     collection,
