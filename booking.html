@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Book Your Stay | Royale Lalawi Hotel</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="css/global.css">
+
+<link rel="stylesheet"
+href="css/home.css">
+
+<link rel="stylesheet"
+href="css/responsive.css">
+
+</head>
+
+<body>
+
+<header class="main-header">
+
+<div class="container">
+
+<div class="logo">
+
+Royale Lalawi
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="rooms.html">Rooms</a></li>
+
+<li><a href="booking.html" class="active">Booking</a></li>
+
+<li><a href="gallery.html">Gallery</a></li>
+
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<a href="contact.html"
+class="book-btn">
+
+Need Help?
+
+</a>
+
+</div>
+
+</header>
+
+<section class="hero"
+style="height:50vh;">
+
+<img src="images/hero.jpg">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<h1>
+
+Book Your Stay
+
+</h1>
+
+<p>
+
+Fast • Secure • Instant Booking Request
+
+</p>
+
+</div>
+
+</section>
+
+<section class="booking-page">
+
+<div class="container">
+
+<div class="section-header">
+
+<span class="section-tag">
+
+ONLINE BOOKING
+
+</span>
+
+<h2>
+
+Reservation Form
+
+</h2>
+
+<p>
+
+Complete the form below to submit your booking request.
+
+</p>
+
+</div>
+
+<form id="bookingForm">
+
+<div class="room-grid">
+
+<div>
+
+<label>
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="name"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Phone Number
+
+</label>
+
+<input
+type="tel"
+id="phone"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Email
+
+</label>
+
+<input
+type="email"
+id="email">
+
+</div>
+
+<div>
+
+<label>
+
+Room Type
+
+</label>
+
+<select
+id="room">
+
+<option>
+
+Select Room
+
+</option>
+
+<option>
+
+Deluxe Room
+
+</option>
+
+<option>
+
+Executive Twin
+
+</option>
+
+<option>
+
+Executive Suite
+
+</option>
+
+<option>
+
+Family Room
+
+</option>
+
+<option>
+
+Premium Suite
+
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+Check In
+
+</label>
+
+<input
+type="date"
+id="checkin"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Check Out
+
+</label>
+
+<input
+type="date"
+id="checkout"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Adults
+
+</label>
+
+<select
+id="adults">
+
+<option>1</option>
+
+<option>2</option>
+
+<option>3</option>
+
+<option>4</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+Children
+
+</label>
+
+<select
+id="children">
+
+<option>0</option>
+
+<option>1</option>
+
+<option>2</option>
+
+<option>3</option>
+
+</select>
+
+</div>
+
+</div>
+  <!-- ================= SPECIAL REQUEST ================= -->
+
+<div style="grid-column:1/-1;">
+
+<label>
+
+Special Requests
+
+</label>
+
+<textarea
+id="request"
+rows="5"
+placeholder="Airport pickup, extra bed, late check-in, anniversary decoration..."></textarea>
+
+</div>
+
+<!-- ================= BOOKING SUMMARY ================= -->
+
+<div class="room-card" style="grid-column:1/-1; margin-top:30px;">
+
+<div class="room-content">
+
+<h2>Booking Summary</h2>
+
+<table class="comparison-table">
+
+<tr>
+<td>Room</td>
+<td id="summaryRoom">Not Selected</td>
+</tr>
+
+<tr>
+<td>Check-in</td>
+<td id="summaryCheckin">--</td>
+</tr>
+
+<tr>
+<td>Check-out</td>
+<td id="summaryCheckout">--</td>
+</tr>
+
+<tr>
+<td>Total Nights</td>
+<td id="summaryNights">0</td>
+</tr>
+
+<tr>
+<td>Estimated Price</td>
+<td id="summaryPrice">₹0</td>
+</tr>
+
+<tr>
+
+<td>
+
+Booking Status
+
+</td>
+
+<td>
+
+<span style="color:orange;font-weight:bold;">
+
+Pending Approval
+
+</span>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ================= AVAILABILITY ================= -->
+
+<div class="room-card" style="grid-column:1/-1;">
+
+<div class="room-content">
+
+<h2>
+
+Room Availability
+
+</h2>
+
+<p id="availabilityMessage">
+
+🟢 Room availability will be checked automatically after you select your dates.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ================= TERMS ================= -->
+
+<div style="grid-column:1/-1;">
+
+<label>
+
+<input
+type="checkbox"
+required>
+
+I agree to the hotel's booking policy and cancellation terms.
+
+</label>
+
+</div>
+
+<!-- ================= SUBMIT ================= -->
+
+<div style="grid-column:1/-1;text-align:center;margin-top:40px;">
+
+<button
+type="submit"
+class="primary-btn"
+style="border:none;cursor:pointer;font-size:18px;">
+
+Submit Booking Request
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- ================= BOOKING PROCESS ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-header">
+
+<span class="section-tag">
+
+HOW IT WORKS
+
+</span>
+
+<h2>
+
+Booking Process
+
+</h2>
+
+</div>
+
+<div class="facility-grid">
+
+<div class="facility-card">
+
+<h3>1️⃣ Submit Booking</h3>
+
+<p>
+
+Complete the online reservation form.
+
+</p>
+
+</div>
+
+<div class="facility-card">
+
+<h3>2️⃣ Pending Review</h3>
+
+<p>
+
+Our staff checks room availability.
+
+</p>
+
+</div>
+
+<div class="facility-card">
+
+<h3>3️⃣ Booking Confirmed</h3>
+
+<p>
+
+You'll receive confirmation by Email and WhatsApp.
+
+</p>
+
+</div>
+
+<div class="facility-card">
+
+<h3>4️⃣ Enjoy Your Stay</h3>
+
+<p>
+
+Welcome to Royale Lalawi Hotel.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact-cta">
+
+<div class="container">
+
+<h2>
+
+Need Assistance?
+
+</h2>
+
+<p>
+
+Our reservation team is available to help you.
+
+</p>
+
+<div class="cta-buttons">
+
+<a href="https://wa.me/916909158272"
+
+class="primary-btn">
+
+WhatsApp Us
+
+</a>
+
+<a href="tel:+916909158272"
+
+class="secondary-btn">
+
+Call Reception
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container footer-grid">
+
+<div>
+
+<h3>Royale Lalawi Hotel</h3>
+
+<p>Luxury Hospitality in Aizawl.</p>
+
+</div>
+
+<div>
+
+<h4>Quick Links</h4>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="rooms.html">Rooms</a></li>
+
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h4>Contact</h4>
+
+<p>📞 +91 6909158272</p>
+
+<p>📍 Khatla North, Aizawl</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 Royale Lalawi Hotel | Designed by <strong>NexoStudio</strong>
+
+</div>
+
+</footer>
+
+<script src="js/booking.js"></script>
+
+</body>
+
+</html>
