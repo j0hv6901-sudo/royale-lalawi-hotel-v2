@@ -1,49 +1,54 @@
-// LOAD BOOKINGS FROM FIRESTORE
-async function loadBookings() {
+// LOAD ROOMS FROM FIRESTORE
+async function loadRooms() {
 
-    const table = document.getElementById("bookingTable");
+    const table = document.getElementById("roomsTable");
     table.innerHTML = "";
 
     const snapshot = await firebaseAPI.getDocs(
-        firebaseAPI.collection(db, "bookings")
+        firebaseAPI.collection(db, "rooms")
     );
 
     if (snapshot.empty) {
         table.innerHTML = `
             <tr>
-                <td colspan="3">No Bookings Yet</td>
+                <td colspan="4">No Rooms Found</td>
             </tr>
         `;
         return;
     }
 
     snapshot.forEach(docSnap => {
-        const b = docSnap.data();
+        const r = docSnap.data();
 
         table.innerHTML += `
             <tr>
-                <td>${b.guest}</td>
-                <td>${b.room}</td>
-                <td>${b.status}</td>
+                <td>${r.roomName}</td>
+                <td>₹${r.price}</td>
+                <td>${r.status}</td>
+                <td>${r.maxGuests}</td>
             </tr>
         `;
     });
 }
 
-// ADD BOOKING TO FIREBASE
-async function addBooking(guest, room) {
+
+// ADD ROOM TO FIREBASE
+async function addRoom(roomName, price, maxGuests) {
 
     await firebaseAPI.addDoc(
-        firebaseAPI.collection(db, "bookings"),
+        firebaseAPI.collection(db, "rooms"),
         {
-            guest: guest,
-            room: room,
-            status: "Pending",
-            date: new Date().toISOString()
+            roomName: roomName,
+            price: price,
+            maxGuests: maxGuests,
+            status: "Available",
+            createdAt: new Date().toISOString()
         }
     );
 
-    loadBookings(); // refresh UI
+    loadRooms(); // refresh UI after adding
 }
 
-document.addEventListener("DOMContentLoaded", loadBookings);
+
+// AUTO LOAD ON PAGE OPEN
+document.addEventListener("DOMContentLoaded", loadRooms);
