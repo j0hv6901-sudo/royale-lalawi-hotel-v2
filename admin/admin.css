@@ -1,0 +1,136 @@
+/* ======================================
+   Royale Lalawi Hotel Management System
+   NexoStudio
+====================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    padding:20px;
+}
+
+.login-container{
+    width:100%;
+    max-width:430px;
+}
+
+.login-box{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+    padding:40px 30px;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.login-box h1{
+    color:#D4AF37;
+    text-align:center;
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.login-box p{
+    color:#ddd;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    color:#fff;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:50px;
+}
+
+.password-box button{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:#555;
+    font-size:18px;
+}
+
+.remember{
+    color:#ddd;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.login-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#D4AF37;
+    color:#111;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#c49b1d;
+}
+
+.footer{
+    margin-top:25px;
+    text-align:center;
+    color:#bbb;
+    font-size:14px;
+}
+
+.footer strong{
+    color:#D4AF37;
+}
+
+@media(max-width:480px){
+
+.login-box{
+    padding:30px 20px;
+}
+
+.login-box h1{
+    font-size:24px;
+}
+
+}
