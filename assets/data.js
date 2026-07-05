@@ -1,19 +1,18 @@
 const HotelData = {
     bookings: [
         {
+            id: 1,
             guest: "John Doe",
             room: "Deluxe Room",
-            status: "Confirmed"
+            status: "Confirmed",
+            date: "2026-07-05"
         },
         {
+            id: 2,
             guest: "Mary Jane",
             room: "Suite",
-            status: "Pending"
-        },
-        {
-            guest: "David Lee",
-            room: "Executive",
-            status: "Checked In"
+            status: "Pending",
+            date: "2026-07-05"
         }
     ],
 
