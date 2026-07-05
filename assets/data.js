@@ -1,4 +1,5 @@
 const HotelData = {
+
     bookings: [
         {
             id: 1,
@@ -6,20 +7,30 @@ const HotelData = {
             room: "Deluxe Room",
             status: "Confirmed",
             date: "2026-07-05"
+        }
+    ],
+
+    rooms: [
+        {
+            id: 101,
+            name: "Deluxe Room",
+            price: 2500,
+            capacity: 2,
+            status: "Available"
         },
         {
-            id: 2,
-            guest: "Mary Jane",
-            room: "Suite",
-            status: "Pending",
-            date: "2026-07-05"
+            id: 102,
+            name: "Suite Room",
+            price: 5000,
+            capacity: 4,
+            status: "Maintenance"
         }
     ],
 
     stats: {
-        checkins: 5,
-        checkouts: 2,
-        pending: 3,
-        revenue: 18500
+        checkins: 1,
+        checkouts: 0,
+        pending: 1,
+        revenue: 2500
     }
 };
