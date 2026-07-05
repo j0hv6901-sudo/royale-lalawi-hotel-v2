@@ -1,0 +1,241 @@
+/* ==========================================
+   NexoStudio Hotel Management System
+========================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+}
+
+/* LOGIN */
+
+.login-container{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+padding:20px;
+}
+
+.login-box{
+width:100%;
+max-width:420px;
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.login-box h1{
+text-align:center;
+color:#D4AF37;
+margin-bottom:10px;
+}
+
+.login-box p{
+text-align:center;
+margin-bottom:30px;
+color:#666;
+}
+
+.input-group{
+margin-bottom:20px;
+}
+
+.input-group label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.input-group input{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:15px;
+}
+
+.password-box{
+position:relative;
+}
+
+.password-box button{
+position:absolute;
+right:15px;
+top:50%;
+transform:translateY(-50%);
+background:none;
+border:none;
+cursor:pointer;
+font-size:18px;
+}
+
+.login-btn{
+width:100%;
+padding:15px;
+background:#D4AF37;
+color:#111;
+border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:20px;
+}
+
+.login-btn:hover{
+background:#c99f22;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+display:flex;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:#0f172a;
+color:white;
+padding:30px 20px;
+}
+
+.sidebar h2{
+color:#D4AF37;
+margin-bottom:5px;
+}
+
+.sidebar p{
+color:#bbb;
+margin-bottom:30px;
+font-size:14px;
+}
+
+.sidebar nav{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.sidebar nav a{
+color:white;
+text-decoration:none;
+padding:14px;
+border-radius:10px;
+transition:.3s;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active{
+background:#D4AF37;
+color:#111;
+}
+
+/* CONTENT */
+
+.content{
+flex:1;
+padding:30px;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.topbar button{
+padding:10px 20px;
+background:#ef4444;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* DASHBOARD CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.card h3{
+color:#666;
+margin-bottom:10px;
+}
+
+.card h2{
+font-size:34px;
+color:#D4AF37;
+}
+
+/* TABLE */
+
+.recent-bookings{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.recent-bookings table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.recent-bookings th{
+background:#D4AF37;
+color:white;
+padding:14px;
+}
+
+.recent-bookings td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.dashboard{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+}
+
+.topbar{
+flex-direction:column;
+gap:15px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+}
