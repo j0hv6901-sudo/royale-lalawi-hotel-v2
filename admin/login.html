@@ -1,96 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Royale Lalawi Hotel | Admin Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Hotel HMS</title>
 
-<link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../assets/layout.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0f172a;
+        }
 
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .login-box button:hover {
+            background: #1d4ed8;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="login-container">
-
 <div class="login-box">
 
-<h1>Royale Lalawi Hotel</h1>
+    <h2>Admin Login</h2>
 
-<p>Hotel Management System</p>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
 
-<form id="loginForm">
+    <button onclick="login()">Login</button>
 
-<div class="input-group">
-
-<label>Email</label>
-
-<input
-type="email"
-id="email"
-placeholder="admin@example.com"
-required>
+    <div class="error" id="error"></div>
 
 </div>
 
-<div class="input-group">
+<script src="../assets/auth.js"></script>
 
-<label>Password</label>
+<script>
+function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-<div class="password-box">
+    const error = document.getElementById("error");
 
-<input
-type="password"
-id="password"
-placeholder="Password"
-required>
+    // TEMP LOGIN (replace later with Firebase)
+    if (username === "admin" && password === "1234") {
 
-<button
-type="button"
-id="togglePassword">
+        Auth.login({
+            name: "Admin",
+            role: "admin"
+        });
 
-<i class="fa-solid fa-eye"></i>
+        window.location.href = "dashboard.html";
 
-</button>
-
-</div>
-
-</div>
-
-<label class="remember">
-
-<input type="checkbox">
-
-Remember Me
-
-</label>
-
-<button
-type="submit"
-class="login-btn">
-
-Sign In
-
-</button>
-
-</form>
-
-<p class="footer">
-
-Powered by <strong>NexoStudio</strong>
-
-</p>
-
-</div>
-
-</div>
-
-<script src="../js/auth.js"></script>
+    } else {
+        error.innerText = "Invalid username or password";
+    }
+}
+</script>
 
 </body>
 </html>
